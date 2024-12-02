@@ -1,4 +1,18 @@
 Rails.application.routes.draw do
+  get 'orders/create'
+  get 'orders/my_orders'
+  get 'tickets/update'
+  get 'tickets/destroy'
+  get 'tickets/create'
+  get 'listings/index'
+  get 'listings/show'
+  get 'listings/new'
+  get 'listings/create'
+  get 'listings/edit'
+  get 'listings/update'
+  get 'listings/destroy'
+  get 'events/index'
+  get 'events/show'
   devise_for :users
   root to: "pages#home"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
