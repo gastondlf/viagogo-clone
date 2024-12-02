@@ -1,0 +1,2 @@
+class TicketCategory < ApplicationRecord
+end
