@@ -1,0 +1,17 @@
+<h1>Order Summary</h1>
+<p><strong>Event: </strong><%= @event.name %></p>
+<p><strong>Date: </strong><%= @event.date %></p>
+<p><strong>Ticket Category: </strong><%= @category.name %></p>
+<p><strong>Ticket Quantity: </strong><%= @tickets.count %></p>
+<p><strong>Individual Ticket Prices:</strong></p>
+<ul>
+  <% @tickets.each do |ticket| %>
+    <li>Ticket <%= ticket.ticket_number %>: $<%= ticket.price %></li>
+  <% end %>
+</ul>
+<p><strong>Total Price: </strong><%= @total_price %></p>
+<h3>Payment Information</h3>
+<%= render 'form', order: @order %>
+
+
+
