@@ -10,7 +10,6 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
- 
   get "/events", to: "events#index"
   get "/events/:id/listings", to: "listings#index"
   get "/listings/new", to: "listings#new", as: "new_listing"
@@ -25,5 +24,5 @@ Rails.application.routes.draw do
   post "/tickets", to: "tickets#create"
   patch "/tickets/:id", to: "tickets#update"
   delete "/tickets/:id", to: "tickets#destroy"
-  
+
 end

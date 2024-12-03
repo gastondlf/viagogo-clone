@@ -1,2 +1,11 @@
 <h1>Listings#index</h1>
+<% @listings.each do |listing| %>
+<div class="container" >
+ <ul>
+  <li>"<%=listing.ticket_category.name%> (<%= listing.quantity %>)"</li>
+  <p><%=listing.description %></p>
+ </ul>
+</div>
+
+<% end %>
 <p>Find me in app/views/listings/index.html.erb</p>
