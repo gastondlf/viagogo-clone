@@ -1,35 +1,36 @@
 class OrdersController < ApplicationController
   before_action :set_user
+  before_action :set_listing, only: [:new]
 
   # this is basically the order confirmation and checkout page
   # this page needs to take payment information, 
   # need some way to pass ticket ids to this action
   # i'm assuming that there is a purchase button on the listing page
   # that will fire this action...
-  # potential problem with the orders table... there is only one ticket id stored there...
-  # each order can only be for one ticket then?
   def new
-    @tickets = Ticket.where(id: params[:ticket_ids])
+    @tickets = @listing.tickets.limit(params[:ticket_quantity])   # assumes ticket quantity number passed from listings page form and all are the same category
     @order = @user.orders.new
     @total_price = @tickets.sum { |ticket| ticket.price }
     @event = @tickets.first.listing.event
-    @category = @tickets.first.listing.ticket_categories   # I'm assuming that all tickets in a listing are the same category 
+    @category = @tickets.first.listing.ticket_category   # I'm assuming that all tickets in a listing are the same category 
   end
   
-  def create
-    @order = @user.orders.new(order_params)
-    @order.save
-    tickets.each do |ticket|
-      ticket.update(status: 'sold')     # updating the ticket status when a new order is created
+  def create 
+    listing_id = params[:order][:listing_id]
+    @tickets = Listing.find(listing_id).tickets
+    @tickets.each do |ticket| 
+      @order = @user.orders.new(status: "sold", ticket_id: ticket.id)      
+      ticket.update_columns(status: 'sold')
+      @order.save
+    end     # updating the ticket status when a new order is created
     redirect_to my_orders_path(@user)
-    end
   end
 
   # so this will show a list of orders 
   # not totally sure about this includes method but I believe this give me access
-  # orders relationship to tickects and listings thru tickets and events thru listings...
+  # orders via relationship to tickects and listings thru tickets and events thru listings...
   def my_orders
-    @orders = @user.orders.includes(tickets: { listing: :event })
+    @orders = @user.orders
   end
 
   private
@@ -38,7 +39,11 @@ class OrdersController < ApplicationController
     @user = current_user
   end
 
+  def set_listing
+    @listing = Listing.find(params[:id])
+  end
+
   def order_params
-    params.require(:order).permit(:status, :ticket_id)
+    params.require(:order).permit(:status, :ticket_id, :listing_id)
   end
 end

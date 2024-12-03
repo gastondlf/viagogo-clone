@@ -1,0 +1,9 @@
+<%= simple_form_for @order do |f| %>  
+  <div class="mb-3">
+    <%= f.hidden_field :listing_id, value: @listing.id %>
+  </div>
+  
+  <div class="mt-3 mb-3">
+    <%= f.submit 'Submit', class: "btn btn-primary" %>
+  </div>
+<% end %>

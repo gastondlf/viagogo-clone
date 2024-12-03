@@ -1,8 +1,7 @@
 <h1>My Orders</h1>
 <% @orders.each do |order| %>
-  <p><strong>Event: </strong><%= order.tickets.first.listing.event.name %></p>
-  <p><strong>Date: </strong><%= order.tickets.first.listing.event.date %></p>
-  <p><strong>Tickets: </strong><%= order.tickets.count %></p>
-  <p><strong>Total Price: </strong><%= order.tickets.sum { |ticket| ticket.price} %></p>
-  <p><strong>Order Date: </strong><%= order.create_at %></p>
+  <p><strong>Event: </strong><%= order.ticket.listing.event.name %></p>
+  <p><strong>Date: </strong><%= order.ticket.listing.event.date %></p>
+  <p><strong>Total Price: </strong><%= order.ticket.price %></p>
+  <p><strong>Order Date: </strong><%= order.created_at %></p>
 <% end %>

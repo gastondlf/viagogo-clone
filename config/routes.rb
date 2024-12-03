@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   post "/listings", to: "listings#create"
   get "/my_listings", to: "listings#my_listings", as: "my_listings"
   delete "/listings/:id", to: "listings#destroy"
-  get "/orders/new", to: "orders#new", as: "new_order"
+  get "listings/:id/orders/new", to: "orders#new", as: "new_order"
   post "/orders", to: "orders#create"
   get "/my_orders", to: "orders#my_orders", as: "my_orders"
   post "/tickets", to: "tickets#create"
