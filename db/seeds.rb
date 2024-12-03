@@ -27,12 +27,17 @@ users = 5.times.map do
   )
 end
 
-# Create 4 ticket categories with Faker
-ticket_categories = 4.times.map do
-  TicketCategory.create!(
-    name: Faker::Commerce.unique.department(max: 1) # Generates unique, short names
-  )
-end
+# Create 4 ticket categories
+ticket_categories = ["General admission", "VIP", "Reserved seating", "Family pass"]
+ticket_categories.each { |ticket_category| TicketCategory.create!(name: ticket_category) }
+
+ticket_categories_array = TicketCategory.all
+
+# ticket_categories = 4.times.map do
+#   TicketCategory.create!(
+#     name: Faker::Commerce.unique.department(max: 1) # Generates unique, short names
+#   )
+# end
 
 # Create 10 events with Faker
 events = 10.times.map do
@@ -51,7 +56,7 @@ tickets = []
 events.each do |event|
   3.times do
     user = users.sample
-    ticket_category = ticket_categories.sample
+    ticket_category = ticket_categories_array.sample
     quantity = rand(1..5)
 
     # Determine listing status based on desired distribution
