@@ -11,8 +11,8 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
   get "/events", to: "events#index"
-  get "/events/:id/listings", to: "listings#index"
-  get "/listings/new", to: "listings#new", as: "new_listing"
+  get "/events/:id/listings", to: "listings#index", as: "event_listings"
+  get "events/:id/listings/new", to: "listings#new", as: "new_listing"
   get "/events/:id/listings/:id", to: "listings#show", as: "listing"
   patch "/events/:id/listings/:id", to: "listings#update"
   post "/listings", to: "listings#create"

@@ -1,14 +1,14 @@
+<%= link_to "Sell Tickets", new_listing_path %>
 <h1><%= @event.name %></h1>
 <% @listings.each do |listing| %>
-<div class="container" >
- <ul>
-  <div class="card">
-    <%=listing.ticket_category.name%> <%= listing.tickets.where(status: 'for_sale').count %>/<%= listing.quantity %>
-    <p><%=listing.description %></p>
-    <p><%= listing.human_status %></p>
-    <%= link_to "Buy Tickets",  new_order_path(listing)%>
+  <div class="container" >
+  <ul>
+    <div class="card">
+      <p><%=listing.ticket_category.name%> (<%= listing.tickets.where(status: 'for_sale').count %>)</p>
+      <p><%=listing.description %></p>
+      <%= link_to "Buy Tickets",  new_order_path(listing)%>
+    </div>
+  </ul>
   </div>
- </ul>
-</div>
 
 <% end %>
