@@ -8,4 +8,8 @@ class Listing < ApplicationRecord
 
   validates :quantity, presence: true
   validates :status, presence: true
+
+  def human_status
+    status.humanize.split(" ").map(&:capitalize).join(" ")
+  end
 end
