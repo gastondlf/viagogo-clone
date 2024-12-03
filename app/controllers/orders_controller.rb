@@ -8,7 +8,7 @@ class OrdersController < ApplicationController
   # i'm assuming that there is a purchase button on the listing page
   # that will fire this action...
   def new
-    @tickets = @listing.tickets.limit(params[:ticket_quantity])   # assumes ticket quantity number passed from listings page form and all are the same category
+    @tickets = @listing.tickets   # assumes ticket quantity number passed from listings page form and all are the same category
     @order = @user.orders.new
     @total_price = @tickets.sum { |ticket| ticket.price }
     @event = @tickets.first.listing.event
@@ -17,7 +17,8 @@ class OrdersController < ApplicationController
   
   def create 
     listing_id = params[:order][:listing_id]
-    @tickets = Listing.find(listing_id).tickets
+    quantity = params[:order][:ticket_quantity].to_i
+    @tickets = Listing.find(listing_id).tickets.limit(quantity)
     @tickets.each do |ticket| 
       @order = @user.orders.new(status: "sold", ticket_id: ticket.id)      
       ticket.update_columns(status: 'sold')

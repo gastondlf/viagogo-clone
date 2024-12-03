@@ -2,7 +2,7 @@
 <p><strong>Event: </strong><%= @event.name %></p>
 <p><strong>Date: </strong><%= @event.date %></p>
 <p><strong>Ticket Category: </strong><%= @category.name %></p>
-<p><strong>Ticket Quantity: </strong><%= @tickets.count %></p>
+<p><strong>Tickets Available: </strong><%= @tickets.count %></p>
 <p><strong>Individual Ticket Prices:</strong></p>
 <ul>
   <% @tickets.each do |ticket| %>
