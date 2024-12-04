@@ -8,7 +8,7 @@ class OrdersController < ApplicationController
   # i'm assuming that there is a purchase button on the listing page
   # that will fire this action...
   def new
-    @tickets = @listing.tickets   # assumes ticket quantity number passed from listings page form and all are the same category
+    @tickets = @listing.tickets.where(status: "for_sale")   # assumes ticket quantity number passed from listings page form and all are the same category
     @order = @user.orders.new
     @total_price = @tickets.sum { |ticket| ticket.price }
     @event = @tickets.first.listing.event
