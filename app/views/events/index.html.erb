@@ -1,11 +1,13 @@
-<h1>Events#index</h1>
-<p>Find me in app/views/events/index.html.erb</p>
-<%= link_to "Back", root_path %>
-<hr>
-<% @events.each do |event| %>
-    <%= link_to event.name, event_listings_path(event) %> ||
-    Date: <%= event.date %> ||
-    Location: <%= event.location %> ||
-    <strong><%= event.tickets.where(status: "for_sale").count %> </strong>tickets available
+<div class="container bg-white mt-3 p-3">
+    <%= render "shared/logo" %>
+    <h1>Events#index</h1>
+    <%= link_to "Back", root_path %>
     <hr>
-    <% end %>
+    <% @events.each do |event| %>
+        <%= link_to event.name, event_listings_path(event) %> ||
+        Date: <%= event.date %> ||
+        Location: <%= event.location %> ||
+        <strong><%= event.tickets.where(status: "for_sale").count %> </strong>tickets available
+        <hr>
+        <% end %>
+</div>
