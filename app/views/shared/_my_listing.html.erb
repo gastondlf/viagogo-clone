@@ -1,0 +1,29 @@
+<div class="container mt-2 p-3 w-100 border shadow rounded">
+    <div class="d-flex align-items-center justify-content-between">
+        <div class="d-flex align-items-center">
+            <%= image_tag "rock-concert-vibes-stockcake.png", size: "100x100" %>
+            <div class="ms-3">
+                <h5 class="mb-0"> <strong><%= link_to listing.event.name, listing_path(listing) %></strong></h5>
+                <p class="small"> <em><%= listing.event.date %>
+                    @ <%= listing.event.location %></em></p>
+                <h5 class="my-0">
+                    <strong>$ <%= listing.tickets.first.price.round(0) %></strong>
+                </h5> 
+                <strong><%= listing.tickets.count %> <em><%= listing.ticket_category.name %></em></strong>
+                <% if listing.tickets.count == 1 %>
+                     ticket for sale
+                <% else %>
+                    tickets for sale
+                <% end %>
+            </div>
+        </div>
+        <div>
+            <%= link_to root_path do %>
+                <i class="me-2 fa-solid fa-pen text-secondary"></i>
+            <% end %>
+            <%= link_to root_path do %>
+                <i class="me-2 fa-solid fa-trash text-secondary"></i>
+            <% end %>
+        </div>
+    </div>
+</div>

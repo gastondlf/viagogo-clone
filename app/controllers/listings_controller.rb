@@ -23,6 +23,11 @@ class ListingsController < ApplicationController
   def destroy
   end
 
+  def my_listings
+    @user = current_user
+    @my_listings = Listing.where(user_id: @user)
+  end
+
   private
 
   def set_event
