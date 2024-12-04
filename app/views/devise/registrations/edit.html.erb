@@ -1,14 +1,24 @@
 <div class="container bg-white border shadow mt-3 p-3">
-  <%= image_tag "gogogo_logo.png", size: "200x59", class: "d-block mx-auto" %>
-  <h4 class="text-center">Edit <%= resource_name.to_s.humanize %></h4>
-    <%= link_to "Back", :back %>
+  <%= render "shared/logo" %>
+  <% if current_user.first_name.empty? %>
+    <h4 class="text-center">Hello! Welcome to your profile page</h4>
+  <% else %>
+    <h4 class="text-center">Hello<%= " #{current_user.first_name}" %>, welcome to your profile page</h4>
+    <% end %>
     <hr>
-
+    <%= link_to "My orders", my_orders_path %>
+    <%= link_to "My listings", my_listings_path %>
+    <hr>
   <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
     <%= f.error_notification %>
   
-    <div class="form-inputs">
-      <%= f.input :email, required: true, hint: "It is not possible to modify your email. Please contact us at: contact@gogogo.com ", input_html: {disabled: true, class: "text-secondary"} %>
+    <div class="form-inputs" data-controller="remove-class">
+      <%= f.input :email, required: true, hint: "It is not possible to modify your email. Please contact us at: contact@gogogo.com ",
+                                          input_html: {
+                                            data: {
+                                                remove_class_target: "inputElementEmail"
+                                              },
+                                              disabled: true, class: "text-secondary"} %>
   
       <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
         <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
@@ -41,7 +51,7 @@
     </div>
   
     <div class="form-actions">
-      <%= f.button :submit, "Update my info", class: "btn btn-success w-100 mt-3" %>
+      <%= f.button :submit, "Update my profile", class: "btn btn-success w-100 mt-3" %>
     </div>
   <% end %>
   <hr>

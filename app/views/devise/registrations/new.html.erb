@@ -1,6 +1,6 @@
 <div class="container w-50 border shadow mt-5 p-3 bg-white">
   <div class="mx-auto">
-  <%= image_tag "gogogo_logo.png", size: "200x59", class: "d-block mx-auto" %>
+  <%= render "shared/logo" %>
   <h4 class="text-center mt-2">Create account</h4>
   </div>
   <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
