@@ -6,6 +6,6 @@
     <%= link_to event.name, event_listings_path(event) %> ||
     Date: <%= event.date %> ||
     Location: <%= event.location %> ||
-    <strong><%= event.tickets.count %> </strong>tickets available
+    <strong><%= event.tickets.where(status: "for_sale").count %> </strong>tickets available
     <hr>
     <% end %>
