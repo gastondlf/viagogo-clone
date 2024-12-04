@@ -1,9 +1,10 @@
 <h1 class="mb-4">My Orders</h1>
 
-<%= form_with url: listings_path, method: :post do %>
-  <% @grouped_orders.each do |(event_name, event_date), orders| %>
-    <h3><%= event_name %> - <%= event_date.strftime('%B %d, %Y') %></h3>
-
+<% @grouped_orders.each do |(event_name, event_date), orders| %>
+  <h3><%= event_name %> - <%= event_date.strftime('%B %d, %Y') %></h3>
+  <% event_id = orders.first.ticket.listing.event.id %>
+  
+  <%= form_with url: event_listings_path(event_id), method: :post do %>
     <div class="mb-4">
       <% orders.each do |order| %>
         <div class="p-2 border-top d-flex align-items-center">
