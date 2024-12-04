@@ -1,23 +1,24 @@
 class ListingsController < ApplicationController
   before_action :set_user, only: %i[new create]
-  before_action :set_event, only: %i[index new]
+  before_action :set_event, only: %i[index new create]
   before_action :set_listing, only: %i[show index]
 
   def index
     @listings = @event.listings.where(status: ['for_sale', 'tickets_available'])
-
   end
 
   def new
     @listing = Listing.new
+    @ticket = @listing.tickets.new
   end
 
   def create
     @listing = Listing.new(listing_params)
     @listing.user = @user
+    @listing.event = @event
     @listing.status = "for_sale"
     if @listing.save!
-      redirect_to event_listings_path(@event)
+      redirect_to new_ticket_path(@listing)
     else
       render :new, status: :unprocessable_entity
     end
@@ -25,14 +26,19 @@ class ListingsController < ApplicationController
 
   def edit
   end
-
   def update
   end
 
   def destroy
+    @listing.destroy
+    redirect_to event_listings_path(@listing.event)
   end
 
   private
+
+  def set_ticket
+    @ticket = Ticket.find(params[:id])
+  end
 
   def set_user
     @user = current_user

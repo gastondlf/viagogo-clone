@@ -1,7 +1,6 @@
 <%= link_to "Sell Tickets", new_listing_path %>
 <h1><%= @event.name %></h1>
 <% @listings.each do |listing| %>
-<<<<<<< HEAD
   <div class="container" >
   <ul>
     <div class="card">
@@ -10,15 +9,6 @@
       <%= link_to "Buy Tickets",  new_order_path(listing)%>
     </div>
   </ul>
-=======
-<div class="container" >
- <ul>
-  <div class="card">
-    <%=listing.ticket_category.name%> <%= listing.tickets.where(status: 'for_sale').count%>
-    <p><%=listing.description %></p>
-    <p><%= listing.human_status %></p>
-    <%= link_to "Buy Tickets",  new_order_path(listing)%>
->>>>>>> main
   </div>
 
 <% end %>

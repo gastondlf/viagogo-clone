@@ -15,14 +15,14 @@ Rails.application.routes.draw do
   get "events/:id/listings/new", to: "listings#new", as: "new_listing"
   get "/events/:id/listings/:id", to: "listings#show", as: "listing"
   patch "/events/:id/listings/:id", to: "listings#update"
-  post "/listings", to: "listings#create"
+  post "events/:id/listings", to: "listings#create"
   get "/my_listings", to: "listings#my_listings", as: "my_listings"
   delete "/listings/:id", to: "listings#destroy"
   get "listings/:id/orders/new", to: "orders#new", as: "new_order"
   post "/orders", to: "orders#create"
   get "/my_orders", to: "orders#my_orders", as: "my_orders"
-  post "/tickets", to: "tickets#create"
+  get "/listings/:id/tickets/new", to: "tickets#new", as: "new_ticket"
+  post "lisitngs/:id/tickets", to: "tickets#create", as: "listing_tickets"
   patch "/tickets/:id", to: "tickets#update"
   delete "/tickets/:id", to: "tickets#destroy"
-
 end

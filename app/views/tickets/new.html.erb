@@ -1,0 +1,16 @@
+<h1>Create new Tickets</h1>
+<div class="container">
+  <%= simple_form_for(:tickets, url: listing_tickets_path(@listing)) do |f| %>
+  <% @listing.quantity.times do |i| %>
+    <h3>Ticket <%= i + 1 %></h3>
+    <%= f.simple_fields_for :"ticket_#{i}" do |p| %>
+      <%= p.input :ticket_number, as: :string,
+                  input_html: { value: params.dig(:tickets, :"ticket_#{i}", :ticket_number) }%>
+      <%= p.input :price, as: :string,
+                  input_html: { value: params.dig(:tickets, :"ticket_#{i}", :price) }%>
+    <% end %>
+  <% end %>
+  <%= f.submit "Create Tickets", class: "btn btn-primary" %>
+<% end %>
+</div>
+</div>
