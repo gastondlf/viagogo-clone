@@ -1,14 +1,19 @@
+<%= render "shared/logo" %>
+<h1><%= @event.name %> at <%= @event.location %> - <%= @event.date %></h1>
+<%= link_to "Back", :back %>
 <%= link_to "Sell Tickets", new_listing_path %>
-<h1><%= @event.name %></h1>
 <% @listings.each do |listing| %>
+  <% unless listing.tickets.where(status: 'for_sale').count == 0 %>
   <div class="container" >
   <ul>
     <div class="card">
       <p><%=listing.ticket_category.name%> (<%= listing.tickets.where(status: 'for_sale').count %>)</p>
       <p><%=listing.description %></p>
+      <p> $<%= listing.tickets.first.price %></p>
       <%= link_to "Buy Tickets",  new_order_path(listing)%>
     </div>
   </ul>
   </div>
+  <% end %>
 
 <% end %>

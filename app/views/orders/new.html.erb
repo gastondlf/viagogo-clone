@@ -1,17 +1,29 @@
-<h1>Order Summary</h1>
-<p><strong>Event: </strong><%= @event.name %></p>
-<p><strong>Date: </strong><%= @event.date %></p>
-<p><strong>Ticket Category: </strong><%= @category.name %></p>
-<p><strong>Tickets Available: </strong><%= @tickets.count %></p>
-<p><strong>Individual Ticket Prices:</strong></p>
-<ul>
-  <% @tickets.each do |ticket| %>
-    <li>Ticket <%= ticket.ticket_number %>: $<%= ticket.price %></li>
-  <% end %>
-</ul>
-<p><strong>Total Price: </strong><%= @total_price %></p>
-<h3>Payment Information</h3>
-<%= render 'form2', order: @order %>
+<%= render "shared/logo" %>
 
+<h1>Order Summary</h1>
+<%= link_to "Back", :back %>
+<hr>
+
+<div class="w-100 d-flex justify-content-between">
+  <div class="">
+    <p><strong>Event: </strong><%= @event.name %></p>
+    <p><strong>Date: </strong><%= @event.date %></p>
+    <p><strong>Ticket Category: </strong><%= @category.name %></p>
+    <p><strong>Tickets Available: </strong><%= @tickets.count %></p>
+    <p><strong>Individual Ticket Prices:</strong></p>
+    <ul>
+      <% @tickets.each do |ticket| %>
+        <li>Ticket <%= ticket.ticket_number %>: $<%= ticket.price %></li>
+      <% end %>
+    </ul>
+    <p><strong>Total Price: </strong><%= @total_price %></p>
+  </div>
+  <div class="w-50">
+  
+    <h3>Payment Information</h3>
+    <%= render 'form2', order: @order %>
+  
+  </div>
+</div>
 
 
