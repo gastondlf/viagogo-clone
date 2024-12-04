@@ -8,7 +8,7 @@ class OrdersController < ApplicationController
   # i'm assuming that there is a purchase button on the listing page
   # that will fire this action...
   def new
-    @tickets = @listing.tickets   # assumes ticket quantity number passed from listings page form and all are the same category
+    @tickets = @listing.tickets.where(status: "for_sale")   # assumes ticket quantity number passed from listings page form and all are the same category
     @order = @user.orders.new
     @total_price = @tickets.sum { |ticket| ticket.price }
     @event = @tickets.first.listing.event
@@ -32,6 +32,9 @@ class OrdersController < ApplicationController
   # orders via relationship to tickects and listings thru tickets and events thru listings...
   def my_orders
     @orders = @user.orders
+    @grouped_orders = @orders.includes(ticket: { listing: :event }).group_by do |order|
+      [order.ticket.listing.event.name, order.ticket.listing.event.date]
+    end
   end
 
   private
