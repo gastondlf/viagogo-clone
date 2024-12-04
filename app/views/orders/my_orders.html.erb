@@ -1,7 +1,8 @@
+<%= render "shared/logo" %>
 <h1 class="mb-4">My Orders</h1>
 
 <% @grouped_orders.each do |(event_name, event_date), orders| %>
-  <h3><%= event_name %> - <%= event_date.strftime('%B %d, %Y') %></h3>
+  <h3><%= event_name %> - <%= event_date.strftime('%B %d, %Y') %> at <%= orders.first.ticket.listing.event.location %></h3>
   <% event_id = orders.first.ticket.listing.event.id %>
   
   <%= form_with url: event_listings_path(event_id), method: :post do %>
@@ -16,7 +17,7 @@
         </div>
       <% end %>
       <div class="mb-5 ps-5">
-        <%= submit_tag "Create Listing", class: "btn btn-primary" %>
+        <%= submit_tag "Resell these tickets", class: "btn btn-primary" %>
       </div>
     </div>
   <% end %>

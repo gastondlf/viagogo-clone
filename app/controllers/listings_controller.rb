@@ -36,7 +36,7 @@ class ListingsController < ApplicationController
 
   def my_listings
     @user = current_user
-    @my_listings = Listing.where(user_id: @user)
+    @my_listings = Listing.where(user_id: @user, status: "for_sale")
   end
 
   private
