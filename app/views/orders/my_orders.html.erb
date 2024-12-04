@@ -1,11 +1,22 @@
 <h1 class="mb-4">My Orders</h1>
 
-<% @grouped_orders.each do |(event_name, event_date), orders| %>
-  <h3><%= event_name %> - <%= event_date.strftime('%B %d, %Y') %></h3>
-  <div class="mb-4">
-    <% orders.each do |order| %>
-      <p><strong>Total Price: </strong><%= order.ticket.price %></p>
-      <p><strong>Order Date: </strong><%= order.created_at.strftime('%B %d, %Y %H:%M %p') %></p>
-    <% end %>
-  </div>
+<%= form_with url: listings_path, method: :post do %>
+  <% @grouped_orders.each do |(event_name, event_date), orders| %>
+    <h3><%= event_name %> - <%= event_date.strftime('%B %d, %Y') %></h3>
+
+    <div class="mb-4">
+      <% orders.each do |order| %>
+        <div class="p-2 border-top d-flex align-items-center">
+          <%= check_box_tag "selected_tickets[]", order.ticket.id, false, class: "form-check-input" %>
+          <label class="form-check-label ps-3">
+            <p><strong>Total Price: </strong><%= order.ticket.price %></p>
+            <p><strong>Order Date: </strong><%= order.created_at.strftime('%B %d, %Y %H:%M %p') %></p>
+          </label>
+        </div>
+      <% end %>
+      <div class="mb-5 ps-5">
+        <%= submit_tag "Create Listing", class: "btn btn-primary" %>
+      </div>
+    </div>
+  <% end %>
 <% end %>
