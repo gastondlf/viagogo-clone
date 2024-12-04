@@ -1,7 +1,11 @@
-<h1>My Orders</h1>
-<% @orders.each do |order| %>
-  <p><strong>Event: </strong><%= order.ticket.listing.event.name %></p>
-  <p><strong>Date: </strong><%= order.ticket.listing.event.date %></p>
-  <p><strong>Total Price: </strong><%= order.ticket.price %></p>
-  <p><strong>Order Date: </strong><%= order.created_at %></p>
+<h1 class="mb-4">My Orders</h1>
+
+<% @grouped_orders.each do |(event_name, event_date), orders| %>
+  <h3><%= event_name %> - <%= event_date.strftime('%B %d, %Y') %></h3>
+  <div class="mb-4">
+    <% orders.each do |order| %>
+      <p><strong>Total Price: </strong><%= order.ticket.price %></p>
+      <p><strong>Order Date: </strong><%= order.created_at.strftime('%B %d, %Y %H:%M %p') %></p>
+    <% end %>
+  </div>
 <% end %>

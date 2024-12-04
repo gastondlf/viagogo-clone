@@ -32,6 +32,9 @@ class OrdersController < ApplicationController
   # orders via relationship to tickects and listings thru tickets and events thru listings...
   def my_orders
     @orders = @user.orders
+    @grouped_orders = @orders.includes(ticket: { listing: :event }).group_by do |order|
+      [order.ticket.listing.event.name, order.ticket.listing.event.date]
+    end
   end
 
   private
