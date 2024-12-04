@@ -1,0 +1,21 @@
+<div class="container mt-3 p-3 w-100 bg-white">
+    <%= render "shared/logo" %>
+    <h1>Listings#my_listings</h1>
+    <div class="d-flex justify-content-between align-items-end">
+        <%= link_to "Back", :back %>
+        <%= link_to "+ New listing", new_listing_path, class: "btn btn-success" %>
+    </div>  
+    <hr>
+    <% @my_listings.each do |listing| %>
+        <%= render "shared/my_listing", listing: listing unless listing.status == "sold_out" %>
+    <% end %>
+
+
+
+
+
+
+
+
+
+</div>

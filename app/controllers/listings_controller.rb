@@ -34,6 +34,11 @@ class ListingsController < ApplicationController
     redirect_to event_listings_path(@listing.event)
   end
 
+  def my_listings
+    @user = current_user
+    @my_listings = Listing.where(user_id: @user)
+  end
+
   private
 
   def set_ticket
