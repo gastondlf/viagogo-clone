@@ -1,7 +1,7 @@
 <%= simple_form_for @order do |f| %>  
   <div class="mb-3">
     <%= f.label :ticket_quantity, "Number of Tickets" %>
-    <%= f.number_field :ticket_quantity, value: 1, min: 1, max: @listing.quantity, step: 1 %>
+    <%= f.number_field :ticket_quantity, value: 1, min: 1, max: @tickets.count, step: 1 %>
   </div>
 
   <div class="col-4">
